@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/dcamb/CLionProjects/PDF_MD_DSL/cmake-build-debug/CMakeFiles/PDF_MD_DSL.dir/embed.manifest"
