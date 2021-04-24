@@ -77,6 +77,9 @@ struct Token {
     int tok_string = -53;
     int tok_comment = -54;
 
+    int tok_else_if = -55;
+    int tok_bool = -56;
+
 };
 
 // global constant TOKENS

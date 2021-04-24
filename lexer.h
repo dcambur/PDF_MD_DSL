@@ -72,6 +72,10 @@ int identifyKeyWord(char str[]){
     {
         return TOKENS.tok_else;
     }
+    else if (strcmp(str, "else if") == 0)
+    {
+        return TOKENS.tok_else_if;
+    }
     else if (strcmp(str, "for") == 0)
     {
         return TOKENS.tok_for;
@@ -102,11 +106,11 @@ int identifyKeyWord(char str[]){
     }
     else if (strcmp(str, "true") == 0)
     {
-        return TOKENS.tok_true;
+        return TOKENS.tok_bool;
     }
     else if (strcmp(str, "false") == 0)
     {
-        return TOKENS.tok_false;
+        return TOKENS.tok_bool;
     }
 
     return 0;
@@ -263,7 +267,9 @@ void start(char c)
         dfa = 2;
     } else if (Number(c)){
         dfa = 1;
-    } else if (c == '\''){
+    } else if (c == '-'){
+		dfa = 5;
+	} else if (c == '\''){
 		dfa = 44;
 	} else if (c == '\"'){
 		dfa = 47;
@@ -325,6 +331,32 @@ void state4(char c)
 {
     if (Number(c)) {
         dfa = 4;
+    }
+    
+    // -1 is used to check for any invalid symbol
+    else {
+        dfa = -1;
+    }
+}
+
+void state5(char c)
+{
+    if (c == '0') { 
+        dfa = 6;
+    } else if (Number(c)) {
+        dfa = 1;
+    }
+    
+    // -1 is used to check for any invalid symbol
+    else {
+        dfa = -1;
+    }
+}
+
+void state6(char c)
+{
+    if (c == '.') {
+        dfa = 3;
     }
     
     // -1 is used to check for any invalid symbol
@@ -422,38 +454,44 @@ int GetToken(char str[]){
         int i, len = strlen(str);
 
         for (i = 0; i < len; i++) {
-        if (dfa == 0) // start symbol
-            start(str[i]);
-  
-        else if (dfa == 1) // num
-            state1(str[i]);
-  
-        else if (dfa == 2) // num
-            state2(str[i]);
-  
-        else if (dfa == 3) // num
-            state3(str[i]);
-  
-        else if (dfa == 4) // num
-            state4(str[i]);
+            if (dfa == 0) // start symbol
+                start(str[i]);
+    
+            else if (dfa == 1) // num
+                state1(str[i]);
+    
+            else if (dfa == 2) // num
+                state2(str[i]);
+    
+            else if (dfa == 3) // num
+                state3(str[i]);
+    
+            else if (dfa == 4) // num
+                state4(str[i]);
+            
+            else if (dfa == 5) // num neg
+                state5(str[i]);
+            
+            else if (dfa == 6) // num neg
+                state6(str[i]);
 
-        else if (dfa == 44) // char
-            state44(str[i]);
+            else if (dfa == 44) // char
+                state44(str[i]);
 
-        else if (dfa == 45) // char
-            state45(str[i]);
+            else if (dfa == 45) // char
+                state45(str[i]);
 
-        else if (dfa == 47) // string
-            state47(str[i]);
+            else if (dfa == 47) // string
+                state47(str[i]);
 
-        else if (dfa == 49) // comments
-            state49(str[i]);
+            else if (dfa == 49) // comments
+                state49(str[i]);
 
-        else if (dfa == 50) // comments
-            state50(str[i]);
+            else if (dfa == 50) // comments
+                state50(str[i]);
 
-        else if (dfa == 52) // variable
-            state52(str[i]);
+            else if (dfa == 52) // variable
+                state52(str[i]);
         }
 
         switch (dfa)
