@@ -1,0 +1,30 @@
+# hello this is comment
+
+render(test4.pdf;
+
+       <font family=helvetica size=25 color=red>
+           <center><bold>"Title try"</bold></center><br>
+       </font>
+
+       <font family=helvetica size=14>
+            <center>
+                <bold>"Hello, my name is Legi... The Kat"</bold>
+                <italic>"I am writing pdf text now"</italic>
+                <underline>"I am quite tired... MEOW"</underline>
+            </center>
+       </font>
+)
+
+render(test5.pdf;
+       <font family=helvetica size=25 color=red>
+           <center><bold>"Title try"</bold></center><br>
+       </font>
+
+       <font family=helvetica size=14>
+            <center>
+                <bold>"Hello, my name is Legi... The Kat"</bold>
+                <italic>"I am writing pdf text now"</italic>
+                <underline>"I am quite tired... MEOW"</underline>
+            </center>
+       </font>
+)
